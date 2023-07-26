@@ -1,0 +1,3 @@
+class: BeautyStyleStateMessage
+fields:
+  beautyStyles: List<BeautyStyle>

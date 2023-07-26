@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "535345966942",
+    "project_id": "geza-marketplace-9334d",
+    "storage_bucket": "geza-marketplace-9334d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535345966942:android:274d4d43505728db2fa9cf",
+        "android_client_info": {
+          "package_name": "com.example.geza_lite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535345966942-q10a9b0lfdmth91pfsh9g6r6o28cmog4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnyUQO7TiIF1tdyccF2_7Zh5rpAXrYQew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535345966942-q10a9b0lfdmth91pfsh9g6r6o28cmog4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "535345966942-2gr3hh2c94utnlmhpmjac75jtlgpvmrg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gezeStylist.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535345966942:android:ad3768e8438d65ea2fa9cf",
+        "android_client_info": {
+          "package_name": "com.example.geza_lite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535345966942-q10a9b0lfdmth91pfsh9g6r6o28cmog4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnyUQO7TiIF1tdyccF2_7Zh5rpAXrYQew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535345966942-q10a9b0lfdmth91pfsh9g6r6o28cmog4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "535345966942-2gr3hh2c94utnlmhpmjac75jtlgpvmrg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gezeStylist.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

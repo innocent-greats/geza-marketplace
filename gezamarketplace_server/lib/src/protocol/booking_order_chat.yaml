@@ -1,0 +1,13 @@
+class: BookingOrderChat
+table: booking_order_chat
+fields:
+  orderedItem: BeautyStyle
+  chatDate: DateTime?,
+  orderDate: DateTime?,
+  orderId: int, BookingOrder
+  customer: Person
+  vendor: Person
+  customerId: int, parent=person
+  vendorId: int, parent=person
+  messages: List<BookingMessage>
+  chatStatus: String?

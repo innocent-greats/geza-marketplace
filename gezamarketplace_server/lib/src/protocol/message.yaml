@@ -1,0 +1,11 @@
+class: Message
+table: message
+fields:
+  topicId: int
+  topic: String
+  createdDate: DateTime?,
+  senderId: int, parent=person
+  sender:  Person
+  recieverId: int, parent=person
+  reciever: Person
+  message: String

@@ -1,0 +1,11 @@
+class: BeautyStyleCreateMessage
+fields:
+  name: String
+  category: String
+  description: String?
+  cityName: String
+  neighbourhoodName: String
+  dateAdded: DateTime?
+  amount: double?
+  images: List<Images>
+  stylistId: int?, parent=person

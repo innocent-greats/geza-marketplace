@@ -1,0 +1,23 @@
+class: Person
+table: person
+fields:
+  firstName: String
+  lastName: String
+  phone: String
+  email: String?
+  password: String?
+  pin: String?
+  city: String?
+  neighbourhood: String?
+  locationCoordinate: int?, parent=location
+  walletId: String?
+  specialization: List<String>?
+  rating: double?
+  accountType: String?
+  isCustomer: bool?
+  isTrader: bool?
+  followers: List<Person>?
+  searchTerm: String?
+  profileImagePathLocation: String?
+  createdDate: String?
+

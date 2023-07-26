@@ -1,0 +1,11 @@
+class: BookingOrder
+table: booking_order
+fields:
+  selectedDate: String,
+  selectedTime: String,
+  orderStatus: String?,
+  customerId: int, parent=person
+  customerType: String,
+  vendorId: int, parent=person
+  beautyStyleId: int, beauty_style=beauty_style
+  dateCreated: DateTime?

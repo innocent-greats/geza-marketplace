@@ -1,0 +1,4 @@
+class: BeautyStylistsState
+fields:
+  stylist: Person
+  beautyStyles: List<BeautyStyle>

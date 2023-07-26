@@ -1,0 +1,3 @@
+class: BookingOrderChatAppendMessage
+fields:
+  bookingOrderChat: BookingOrderChat

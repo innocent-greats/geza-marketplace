@@ -1,0 +1,1717 @@
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     ElevatedButton(
+                //       style: ElevatedButton.styleFrom(
+                //           backgroundColor: Colors.purple[700]),
+                //       onPressed: () {
+                //         Get.to(const AppointmentDetailsScreen(),
+                //             arguments:
+                //                 _servicesController.selectedStylist.value);
+                //       },
+                //       child: Text(
+                //         Strings.bookNow,
+                //         style: TextStyle(
+                //             fontWeight: FontWeight.bold,
+                //             color: Colors.white,
+                //             fontSize: Dimensions.smallTextSize),
+                //       ),
+                //     ),
+                //   ],
+                // )      
+      
+            // bottomNavigationBar: BottomAppBar(
+        //   child: Padding(
+        //     padding: const EdgeInsets.all(8),
+        //     child: OverflowBar(
+        //       overflowAlignment: OverflowBarAlignment.center,
+        //       children: <Widget>[
+        //         Row(
+        //           mainAxisSize: MainAxisSize.min,
+        //           children: <Widget>[
+        //             const Text('pinned'),
+        //             Switch(
+        //               onChanged: (bool val) {
+        //                 setState(() {
+        //                   _pinned = val;
+        //                 });
+        //               },
+        //               value: _pinned,
+        //             ),
+        //           ],
+        //         ),
+        //         Row(
+        //           mainAxisSize: MainAxisSize.min,
+        //           children: <Widget>[
+        //             const Text('snap'),
+        //             Switch(
+        //               onChanged: (bool val) {
+        //                 setState(() {
+        //                   _snap = val;
+        //                   // Snapping only applies when the app bar is floating.
+        //                   _floating = _floating || _snap;
+        //                 });
+        //               },
+        //               value: _snap,
+        //             ),
+        //           ],
+        //         ),
+        //         Row(
+        //           mainAxisSize: MainAxisSize.min,
+        //           children: <Widget>[
+        //             const Text('floating'),
+        //             Switch(
+        //               onChanged: (bool val) {
+        //                 setState(() {
+        //                   _floating = val;
+        //                   _snap = _snap && _floating;
+        //                 });
+        //               },
+        //               value: _floating,
+        //             ),
+        //           ],
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        
+          Future<void> filterSearchResultsByCategory(String category) async {
+    debugPrint("filterSearchResults query:  $category");
+
+    filteredSearchResults.value = filteredSearchResults
+        .where((item) =>
+            item.category.toLowerCase().contains(category.toLowerCase()))
+        .toList();
+    debugPrint(
+        "filterSearchResults filteredSearchResults:  $filteredSearchResults");
+  }
+    
+    Future<void> filterSearchResultsByCity(String city) async {
+    debugPrint("filterSearchResults city:  $city");
+    debugPrint("filterSearchResults:  $filteredSearchResults");
+    if (filteredSearchResults.isEmpty) {
+      filteredSearchResults.value = beautyStyles
+          .where((item) =>
+              item.cityName.toLowerCase().contains(city.toLowerCase()))
+          .toList();
+    } else {
+      filteredSearchResults.value = filteredSearchResults
+          .where((item) =>
+              item.cityName.toLowerCase().contains(city.toLowerCase()))
+          .toList();
+    }
+
+    debugPrint(
+        "filterSearchResults filteredSearchResults:  $filteredSearchResults");
+  }
+
+  Future<void> filterSearchResultsByNeighbourhood(String city) async {
+    debugPrint("filterSearchResults Neighbourhood:  $city");
+    debugPrint("filterSearchResults:  $filteredSearchResults");
+    if (filteredSearchResults.isEmpty) {
+      filteredSearchResults.value = beautyStyles
+          .where((item) =>
+              item.neighbourhoodName.toLowerCase().contains(city.toLowerCase()))
+          .toList();
+    } else {
+      filteredSearchResults.value = filteredSearchResults
+          .where((item) =>
+              item.neighbourhoodName.toLowerCase().contains(city.toLowerCase()))
+          .toList();
+    }
+
+    debugPrint("Neighbourhood filteredSearchResults:  $filteredSearchResults");
+  }
+
+  
+  Future<void> beautyStylistsStateSearchResults() async {
+    debugPrint("searchItem.value ${searchItemCategory.value} ");
+    debugPrint("searchItem.value ${searchItem.value} ");
+    debugPrint("searchCity.value ${searchCity.value} ");
+    debugPrint("searchNeighbourhood.value ${searchNeighbourhood.value} ");
+
+    debugPrint("filterSearchResults:  $filteredSearchResults");
+    {
+      debugPrint("-----------------------------------");
+      debugPrint("search on  filteredSearchResults".capitalize);
+      debugPrint("---------------------------------------");
+
+      if (searchItemCategory.value == '' &&
+          searchItem.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  no parameter".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredBeautyStylistsStateSearchResults.value = beautyStylists;
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItemCategory only ${searchItem.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredBeautyStylistsStateSearchResults.value = beautyStylists
+            .where((item) => item.stylist.searchTerm!
+                .toLowerCase()
+                .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem only ${searchItem.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredBeautyStylistsStateSearchResults.value = beautyStylists
+            .where((item) => item.stylist.searchTerm!
+                .toLowerCase()
+                .contains(searchItem.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory ${searchItem.value}, ${searchItemCategory.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredBeautyStylistsStateSearchResults.value =
+            filteredBeautyStylistsStateSearchResults
+                .where((item) =>
+                    item.stylist.searchTerm!
+                        .toLowerCase()
+                        .contains(searchItem.value.toLowerCase()) &&
+                    item.stylist.searchTerm!
+                        .toLowerCase()
+                        .contains(searchItemCategory.value.toLowerCase()))
+                .toList();
+      }
+    }
+
+    debugPrint(
+        "filterSearchResults filteredSearchResults:  $filteredBeautyStylistsStateSearchResults");
+  }
+  @override
+  Future<void> chainSearchResults() async {
+    debugPrint("searchItem.value ${searchItemCategory.value} ");
+    debugPrint("searchItem.value ${searchItem.value} ");
+    debugPrint("searchCity.value ${searchCity.value} ");
+    debugPrint("searchNeighbourhood.value ${searchNeighbourhood.value} ");
+
+    debugPrint("filterSearchResults:  $filteredSearchResults");
+    {
+      debugPrint("-----------------------------------");
+      debugPrint("search on  filteredSearchResults".capitalize);
+      debugPrint("---------------------------------------");
+
+      if (searchItemCategory.value == '' &&
+          searchCity.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  no parameter".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = filteredSearchResults;
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem ${searchItem.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = filteredSearchResults
+            .where((item) => item.name
+                .toLowerCase()
+                .contains(searchItem.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem ${searchItem.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = filteredSearchResults
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchCity ${searchItem.value}, ${searchCity.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory and searchCity ${searchItem.value},  ${searchItemCategory.value}, ${searchCity.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchCity and searchNeighbourhood ${searchItem.value}, ${searchCity.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory and searchCity and searchNeighbourhood ${searchItem.value}, ${searchCity.value},${searchItemCategory.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity and searchNeighbourhood  ${searchCity.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity and searchItemCategory and searchNeighbourhood  ${searchCity.value}, ${searchItemCategory.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and  searchNeighbourhood ${searchItem.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory and  searchNeighbourhood ${searchItem.value}, ${searchItemCategory.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity only ${searchCity.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) => item.cityName
+                .toLowerCase()
+                .contains(searchCity.value.toLowerCase()))
+            .toList();
+      }
+
+      if (searchItem.value == '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity and searchItemCategory only ${searchCity.value}, ${searchItemCategory.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+    }
+
+    debugPrint(
+        "filterSearchResults filteredSearchResults:  $filteredSearchResults");
+  }
+  
+  Future<void> chainSearchResults() async {
+    debugPrint("searchItem.value ${searchItemCategory.value} ");
+    debugPrint("searchItem.value ${searchItem.value} ");
+    debugPrint("searchCity.value ${searchCity.value} ");
+    debugPrint("searchNeighbourhood.value ${searchNeighbourhood.value} ");
+
+    debugPrint("filterSearchResults:  $filteredSearchResults");
+    {
+      debugPrint("-----------------------------------");
+      debugPrint("search on  filteredSearchResults".capitalize);
+      debugPrint("---------------------------------------");
+
+      if (searchItemCategory.value == '' &&
+          searchItem.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  no parameter".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles;
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItemCategory only ${searchItem.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) => item.category
+                .toLowerCase()
+                .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem only ${searchItem.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) => item.searchTerm!
+                .toLowerCase()
+                .contains(searchItem.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory ${searchItem.value}, ${searchItemCategory.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = filteredSearchResults
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchCity ${searchItem.value}, ${searchCity.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory and searchCity ${searchItem.value},  ${searchItemCategory.value}, ${searchCity.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchCity and searchNeighbourhood ${searchItem.value}, ${searchCity.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory and searchCity and searchNeighbourhood ${searchItem.value}, ${searchCity.value},${searchItemCategory.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()) &&
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity and searchNeighbourhood  ${searchCity.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity and searchItemCategory and searchNeighbourhood  ${searchCity.value}, ${searchItemCategory.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and  searchNeighbourhood ${searchItem.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value != '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value == '' &&
+          searchNeighbourhood.value != '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchItem and searchItemCategory and  searchNeighbourhood ${searchItem.value}, ${searchItemCategory.value}, ${searchNeighbourhood.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.name
+                    .toLowerCase()
+                    .contains(searchItem.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()) &&
+                item.neighbourhoodName
+                    .toLowerCase()
+                    .contains(searchNeighbourhood.value.toLowerCase()))
+            .toList();
+      }
+      if (searchItem.value == '' &&
+          searchItemCategory.value == '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity only ${searchCity.value}".capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) => item.cityName
+                .toLowerCase()
+                .contains(searchCity.value.toLowerCase()))
+            .toList();
+      }
+
+      if (searchItem.value == '' &&
+          searchItemCategory.value != '' &&
+          searchCity.value != '' &&
+          searchNeighbourhood.value == '') {
+        debugPrint("-----------------------------------");
+        debugPrint(
+          "search by  searchCity and searchItemCategory only ${searchCity.value}, ${searchItemCategory.value}"
+              .capitalize,
+        );
+        debugPrint("---------------------------------------");
+        filteredSearchResults.value = beautyStyles
+            .where((item) =>
+                item.cityName
+                    .toLowerCase()
+                    .contains(searchCity.value.toLowerCase()) &&
+                item.category
+                    .toLowerCase()
+                    .contains(searchItemCategory.value.toLowerCase()))
+            .toList();
+      }
+    }
+
+    debugPrint(
+        "filterSearchResults filteredSearchResults:  $filteredSearchResults");
+  }
+
+Padding(
+              padding: const EdgeInsets.only(
+                right: Dimensions.widthSize * 5,
+              ),
+              child: Stack(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SearchResultScreen()));
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              color: CustomColor.secondaryColor,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: Image.asset(
+                            category.image,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    right: -2,
+                    top: 2,
+                    child: Container(
+                      height: 15.0,
+                      width: 20.0,
+                      decoration: BoxDecoration(
+                          color: CustomColor.primaryColor,
+                          borderRadius: BorderRadius.circular(30.0)),
+                      child: Center(
+                        child: Obx(() => Text(
+                              category.name == 'Hair Care'
+                                  ? "${_servicesController.totalHairStyles}"
+                                  : category.name == 'Skin & Nail Care'
+                                      ? "${_servicesController.totalskinFacialServices}"
+                                      : category.name == 'Product'
+                                          ? "${_servicesController.totalbeautyProducts}"
+                                          : "${_servicesController.totalBeautyStyles}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.smallTextSize),
+                            )),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+
+                  Column(
+                                          children: beautyStyle.images
+                                              .asMap()
+                                              .entries
+                                              .map((image) {
+                                            int idx = image.key;
+                                            debugPrint('image index $idx');
+
+                                            ListView.builder(
+                                        itemCount: beautyStyle.images.length,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          debugPrint('controller.index $index');
+                                          debugPrint(
+                                              'controller.beautyStyle ${beautyStyle.images.length}');
+                                          Images image =
+                                              beautyStyle.images[index];
+                                          _servicesController
+                                                  .selectedIndexImage.value =
+                                              beautyStyle.images[0].pathLocation
+                                                  .toString();
+                                          return Column(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  _servicesController
+                                                      .updateSelectedIndexImage(
+                                                          image.pathLocation
+                                                              .toString(),
+                                                          index);
+                                                },
+                                                child: Obx(() => Container(
+                                                      decoration: BoxDecoration(
+                                                          border: index ==
+                                                                  _servicesController
+                                                                      .selectedImageIndex
+                                                                      .value
+                                                              ? Border.all(
+                                                                  color: CustomColor
+                                                                      .primaryColor)
+                                                              : Border.all(
+                                                                  color: Colors
+                                                                      .transparent)),
+                                                      child: ClipRRect(
+                                                        borderRadius: index ==
+                                                                _servicesController
+                                                                    .selectedImageIndex
+                                                                    .value
+                                                            ? BorderRadius.zero
+                                                            : BorderRadius
+                                                                .circular(
+                                                                    Dimensions
+                                                                        .radius),
+                                                        child: Image.network(
+                                                          image.pathLocation
+                                                              .toString(),
+                                                          height: index ==
+                                                                  _servicesController
+                                                                      .selectedImageIndex
+                                                                      .value
+                                                              ? 55
+                                                              : 45,
+                                                          width: index ==
+                                                                  _servicesController
+                                                                      .selectedImageIndex
+                                                                      .value
+                                                              ? 55
+                                                              : 45,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    )),
+                                              ),
+                                              const SizedBox(
+                                                height:
+                                                    Dimensions.widthSize * 0.5,
+                                              ),
+                                            ],
+                                          );
+                                        }),
+
+
+                                                                                Column(
+                                          children: beautyStyle.images
+                                              .asMap()
+                                              .entries
+                                              .map((image) {
+                                            int idx = image.key;
+                                            debugPrint('image index $idx');
+
+                                            return Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    _servicesController
+                                                        .updateSelectedIndexImage(
+                                                            image.value
+                                                                .pathLocation
+                                                                .toString(),
+                                                            idx);
+                                                  },
+                                                  child: Obx(() => Container(
+                                                        decoration: BoxDecoration(
+                                                            border: idx ==
+                                                                    _servicesController
+                                                                        .selectedImageIndex
+                                                                        .value
+                                                                ? Border.all(
+                                                                    color: CustomColor
+                                                                        .primaryColor)
+                                                                : Border.all(
+                                                                    color: Colors
+                                                                        .transparent)),
+                                                        child: ClipRRect(
+                                                          borderRadius: idx ==
+                                                                  _servicesController
+                                                                      .selectedImageIndex
+                                                                      .value
+                                                              ? BorderRadius
+                                                                  .zero
+                                                              : BorderRadius
+                                                                  .circular(
+                                                                      Dimensions
+                                                                          .radius),
+                                                          child: Image.network(
+                                                            image.value
+                                                                .pathLocation
+                                                                .toString(),
+                                                            height: idx ==
+                                                                    _servicesController
+                                                                        .selectedImageIndex
+                                                                        .value
+                                                                ? 55
+                                                                : 45,
+                                                            width: idx ==
+                                                                    _servicesController
+                                                                        .selectedImageIndex
+                                                                        .value
+                                                                ? 55
+                                                                : 45,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      )),
+                                                ),
+                                                const SizedBox(
+                                                  height: Dimensions.widthSize *
+                                                      0.5,
+                                                ),
+                                              ],
+                                            );
+                                          }).toList(),
+                                        ),            
+
+
+
+                                                  // Row(
+          //   children: [
+          //     Expanded(
+          //       flex: 2,
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             Strings.service,
+          //             style: const TextStyle(
+          //                 color: Colors.black, fontWeight: FontWeight.bold),
+          //           ),
+          //           const SizedBox(
+          //             height: Dimensions.heightSize,
+          //           ),
+          //           Text(
+          //             '${beautyStyle.name.capitalize}',
+          //             style: CustomStyle.textStyle,
+          //           ),
+          //           const SizedBox(
+          //             height: Dimensions.heightSize * 0.5,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     Expanded(
+          //       flex: 1,
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             Strings.price,
+          //             style: const TextStyle(
+          //                 color: Colors.black, fontWeight: FontWeight.bold),
+          //           ),
+          //           const SizedBox(
+          //             height: Dimensions.heightSize,
+          //           ),
+          //           Text(
+          //             '\$ ${beautyStyle.amount}',
+          //             style: CustomStyle.textStyle,
+          //           ),
+          //           const SizedBox(
+          //             height: Dimensions.heightSize * 0.5,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: Dimensions.heightSize),
+          // Container(
+          //   height: 50.0,
+          //   //width: MediaQuery.of(context).size.width,
+          //   decoration: BoxDecoration(
+          //       color: CustomColor.accentColor,
+          //       borderRadius:
+          //           const BorderRadius.all(Radius.circular(Dimensions.radius)),
+          //       border: Border.all(color: Colors.black.withOpacity(0.1))),
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(
+          //         left: Dimensions.marginSize * 0.5,
+          //         right: Dimensions.marginSize * 0.5),
+          //     child: DropdownButton(
+          //       isExpanded: true,
+          //       underline: Container(),
+          //       hint: Text(
+          //         selectedCoupon,
+          //         style: CustomStyle.textStyle,
+          //       ), // Not necessary for Option 1
+          //       value: selectedCoupon,
+          //       onChanged: (newValue) {
+          //         setState(() {
+          //           selectedCoupon = newValue!;
+          //           print('value: $selectedCoupon');
+          //         });
+          //       },
+          //       items: couponList.map((value) {
+          //         return DropdownMenuItem(
+          //           value: value,
+          //           child: Text(
+          //             value,
+          //             style: CustomStyle.textStyle,
+          //           ),
+          //         );
+          //       }).toList(),
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(height: Dimensions.heightSize),
+          // selectedCoupon == 'I have a coupon'
+          //     ? TextFormField(
+          //         style: CustomStyle.textStyle,
+          //         controller: couponController,
+          //         keyboardType: TextInputType.text,
+          //         decoration: InputDecoration(
+          //           hintText: 'OFFER10',
+          //           contentPadding: const EdgeInsets.symmetric(
+          //               vertical: 10.0, horizontal: 10.0),
+          //           labelStyle: CustomStyle.textStyle,
+          //           filled: true,
+          //           fillColor: CustomColor.accentColor,
+          //           hintStyle: CustomStyle.textStyle,
+          //           focusedBorder: CustomStyle.focusBorder,
+          //           enabledBorder: CustomStyle.focusErrorBorder,
+          //           focusedErrorBorder: CustomStyle.focusErrorBorder,
+          //           errorBorder: CustomStyle.focusErrorBorder,
+          //         ),
+          //       )
+          //     : Container(),
+
+
+                    Padding(
+            padding: const EdgeInsets.only(
+                right: Dimensions.marginSize,
+                left: Dimensions.marginSize,
+                bottom: 20),
+            child: Obx(
+              () => _servicesController.searchByLocation.value == true
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: CustomSearchableDropDown(
+                              items: _servicesController.populatedCities,
+                              label: 'Select City e.g Harare',
+                              labelStyle: TextStyle(fontSize: 12),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  border:
+                                      Border.all(color: Colors.purple.shade50)),
+                              dropDownMenuItems: _servicesController
+                                  .populatedCities
+                                  .map((item) {
+                                return item['name'];
+                              }).toList(),
+                              onChanged: (value) {
+                                if (value != null) {
+                                  _servicesController.searchCity.value = '';
+                                  _servicesController.selected =
+                                      value['name'].toString();
+                                  // _servicesController.filterSearchResultsByCity(
+                                  //     _servicesController.selected);
+                                  _servicesController.searchCity.value =
+                                      value['name'].toString();
+                                  _servicesController.chainSearchResults();
+                                } else {
+                                  _servicesController.selected = null;
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: TextFormField(
+                              onChanged: (value) => {
+                                _servicesController.searchNeighbourhood.value =
+                                    value.toString(),
+                                _servicesController.chainSearchResults()
+                              },
+                              style: CustomStyle.textStyle,
+                              controller: neighbourhoodSerachController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                hintText: 'search by area e.g HighFields'
+                                    .capitalizeFirst,
+                                hintMaxLines: 2,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 10.0),
+                                labelStyle: CustomStyle.textStyle,
+                                filled: true,
+                                fillColor:
+                                    const Color.fromARGB(255, 246, 245, 245),
+                                hintStyle: CustomStyle.textStyle,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.purple.shade50)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    borderSide: BorderSide(
+                                        color: Colors.purple.shade50)),
+                                focusedErrorBorder:
+                                    CustomStyle.focusErrorBorder,
+                                errorBorder: CustomStyle.focusErrorBorder,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : const Column(),
+            ),
+          ),
+
+
+ ListView.builder(
+                    itemCount: _servicesController.filteredSearchResults.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      debugPrint('controller.index $index');
+                      debugPrint(
+                          'controller.beautyStyle ${_servicesController.filteredSearchResults.length}');
+                      BeautyStyle beautyStyle =
+                          _servicesController.filteredSearchResults[index];
+                      _servicesController.selectedIndexImage.value =
+                          beautyStyle.images[0].pathLocation.toString();
+                      // setState(() {});
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: GestureDetector(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                height: 250,
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            _servicesController
+                                                .selectedBeautyStyle
+                                                .value = beautyStyle;
+                                            Get.to(ParlourDetailsScreen());
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                Dimensions.radius),
+                                            child: Obx(() => beautyStyle.id ==
+                                                    _servicesController
+                                                        .selectedItemId.value
+                                                ? Image.network(
+                                                    _servicesController
+                                                        .selectedIndexImage
+                                                        .value,
+                                                    height: 250,
+                                                    width: 260,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.network(
+                                                    beautyStyle
+                                                        .images[0].pathLocation
+                                                        .toString(),
+                                                    height: 250,
+                                                    width: 260,
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0.0,
+                                          left: 0,
+                                          child: Container(
+                                            height: 60,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 30,
+                                                      width: 200,
+                                                      child: Center(
+                                                        child: Text(
+                                                          DateTime.parse(
+                                                                  beautyStyle
+                                                                      .dateAdded
+                                                                      .toString())
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: Dimensions
+                                                                  .smallTextSize,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 5),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 30,
+                                                      width: 70,
+                                                      child: Center(
+                                                        child: Text(
+                                                          'Portia C',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: Dimensions
+                                                                  .smallTextSize,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 5),
+                                                    Container(
+                                                      child: Center(
+                                                        child: Text(
+                                                          '-',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: Dimensions
+                                                                  .smallTextSize,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 10),
+                                                    Container(
+                                                      height: 30,
+                                                      // width: 70,
+                                                      decoration: BoxDecoration(
+                                                          color: CustomColor
+                                                              .secondaryColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      13)),
+                                                      child: Center(
+                                                        child: Text(
+                                                          beautyStyle.amount
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: Dimensions
+                                                                  .smallTextSize,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                        width:
+                                                            50), // give it width
+
+                                                    SizedBox(
+                                                      child: Container(
+                                                        height: 30,
+                                                        width: 70,
+                                                        decoration: BoxDecoration(
+                                                            color: CustomColor
+                                                                .secondaryColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        13)),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            const Icon(
+                                                              Icons.leak_add,
+                                                              color: CustomColor
+                                                                  .primaryColor,
+                                                              size: 20,
+                                                            ),
+                                                            const SizedBox(
+                                                              width: Dimensions
+                                                                      .widthSize *
+                                                                  0.5,
+                                                            ),
+                                                            Text(
+                                                              'Share',
+                                                              style: TextStyle(
+                                                                  color: CustomColor
+                                                                      .primaryColor,
+                                                                  fontSize:
+                                                                      Dimensions
+                                                                          .smallTextSize,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      width: Dimensions.heightSize * 1.5,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Column(
+                                          children: beautyStyle.images
+                                              .sublist(0, 1)
+                                              .asMap()
+                                              .entries
+                                              .map((image) {
+                                            int idx = image.key;
+                                            debugPrint(
+                                                'images for beautyStyle.id ${beautyStyle.id}');
+                                            debugPrint('image index $idx');
+
+                                            return Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    _servicesController
+                                                            .selectedItemId
+                                                            .value =
+                                                        beautyStyle.id as int;
+                                                    _servicesController
+                                                        .updateSelectedIndexImage(
+                                                            image.value
+                                                                .pathLocation
+                                                                .toString(),
+                                                            idx);
+                                                  },
+                                                  child: Obx(() => Container(
+                                                        decoration: BoxDecoration(
+                                                            border: idx ==
+                                                                        _servicesController
+                                                                            .selectedImageIndex
+                                                                            .value &&
+                                                                    image.value
+                                                                            .pathLocation
+                                                                            .toString() ==
+                                                                        _servicesController
+                                                                            .selectedIndexImage
+                                                                            .value &&
+                                                                    _servicesController
+                                                                            .selectedItemId
+                                                                            .value ==
+                                                                        beautyStyle.id
+                                                                            as int
+                                                                ? Border.all(
+                                                                    color: CustomColor
+                                                                        .primaryColor)
+                                                                : Border.all(
+                                                                    color: Colors
+                                                                        .transparent)),
+                                                        child: ClipRRect(
+                                                          borderRadius: idx ==
+                                                                      _servicesController
+                                                                          .selectedImageIndex
+                                                                          .value &&
+                                                                  image.value
+                                                                          .pathLocation
+                                                                          .toString() ==
+                                                                      _servicesController
+                                                                          .selectedIndexImage
+                                                                          .value &&
+                                                                  _servicesController
+                                                                          .selectedItemId
+                                                                          .value ==
+                                                                      beautyStyle
+                                                                              .id
+                                                                          as int
+                                                              ? BorderRadius
+                                                                  .zero
+                                                              : BorderRadius
+                                                                  .circular(
+                                                                      Dimensions
+                                                                          .radius),
+                                                          child: Image.network(
+                                                            image.value
+                                                                .pathLocation
+                                                                .toString(),
+                                                            height: idx ==
+                                                                        _servicesController
+                                                                            .selectedImageIndex
+                                                                            .value &&
+                                                                    image.value
+                                                                            .pathLocation
+                                                                            .toString() ==
+                                                                        _servicesController
+                                                                            .selectedIndexImage
+                                                                            .value &&
+                                                                    _servicesController
+                                                                            .selectedItemId
+                                                                            .value ==
+                                                                        beautyStyle.id
+                                                                            as int
+                                                                ? 55
+                                                                : 45,
+                                                            width: idx ==
+                                                                        _servicesController
+                                                                            .selectedImageIndex
+                                                                            .value &&
+                                                                    image.value
+                                                                            .pathLocation
+                                                                            .toString() ==
+                                                                        _servicesController
+                                                                            .selectedIndexImage
+                                                                            .value &&
+                                                                    _servicesController
+                                                                            .selectedItemId
+                                                                            .value ==
+                                                                        beautyStyle.id
+                                                                            as int
+                                                                ? 55
+                                                                : 45,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                      )),
+                                                ),
+                                                const SizedBox(
+                                                  height: Dimensions.widthSize *
+                                                      0.5,
+                                                ),
+                                              ],
+                                            );
+                                          }).toList(),
+                                        ),
+
+                                        // const SizedBox(
+                                        //   height: Dimensions.heightSize * 0.5,
+                                        // ),
+                                        SizedBox(
+                                          height: 30,
+                                          width: 100,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Icon(
+                                                Icons.location_on,
+                                                color: CustomColor.primaryColor,
+                                                size: 20,
+                                              ),
+                                              const SizedBox(
+                                                width:
+                                                    Dimensions.widthSize * 0.1,
+                                              ),
+                                              const SizedBox(
+                                                width:
+                                                    Dimensions.widthSize * 0.1,
+                                              ),
+                                              const SizedBox(
+                                                height:
+                                                    Dimensions.widthSize * 0.1,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        beautyStyle
+                                                            .neighbourhoodName
+                                                            .capitalizeFirst!,
+                                                        style: TextStyle(
+                                                            color: CustomColor
+                                                                .primaryColor,
+                                                            fontSize: Dimensions
+                                                                .smallTextSize,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        beautyStyle.cityName
+                                                            .capitalizeFirst!,
+                                                        style: TextStyle(
+                                                            color: CustomColor
+                                                                .primaryColor,
+                                                            fontSize: Dimensions
+                                                                .smallTextSize,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  
+
+ListView(
+              //portant: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: profileWidget(context),
+                  decoration: const BoxDecoration(
+                    color: CustomColor.primaryColor,
+                  ),
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.account_balance_wallet_rounded,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    Strings.addPaymentMethod,
+                    style: CustomStyle.listStyle,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AddNewCardScreen()));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.track_changes_rounded,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    Strings.changePassword,
+                    style: CustomStyle.listStyle,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ChangePasswordScreen()));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.person_4_rounded,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Manage Profile',
+                    style: CustomStyle.listStyle,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.exit_to_app,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    Strings.signOut,
+                    style: CustomStyle.listStyle,
+                  ),
+                  onTap: () {
+                    _authController.onHandleLogout();
+                  },
+                ),
+              ],
+            ),                    
+
+class DrawerWithProfileImage extends StatelessWidget {
+  const DrawerWithProfileImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<AuthController>(
+        init: AuthController(),
+        builder: (controller) => Drawer(
+              child: ListView(
+                children: const [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: CustomColor.primaryColor,
+                    ),
+                    child: CircleAvatar(
+                      radius: 60.0,
+                      backgroundImage:
+                          NetworkImage('https://picsum.photos/200'),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text('Home'),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.account_box),
+                    title: Text('About'),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.grid_3x3_outlined),
+                    title: Text('Products'),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.contact_mail),
+                    title: Text('Contact'),
+                  ),
+                ],
+              ),
+            ));
+  }
+}
+        drawer: Drawer(
+          child: Container(
+              color: CustomColor.primaryColor,
+              child: const DrawerWithProfileImage()),
+        ),

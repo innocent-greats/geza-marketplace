@@ -1,0 +1,8 @@
+  keytool -genkey -v -keystore ..\geza-pro-keystore.jks ^
+          -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 ^
+          -alias geza-pro
+
+
+keytool -genkey -v -keystore ..\geza-lite-keystore.jks ^
+          -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 ^
+          -alias geza-lite

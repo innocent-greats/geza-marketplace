@@ -1,0 +1,6 @@
+class: OrderChat
+table: order_chat
+fields:
+  dateCreated: DateTime?,
+  order: SaleOrder
+  messages: List<Message>

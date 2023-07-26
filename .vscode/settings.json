@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 8090,
+            "driver": "PostgreSQL",
+            "name": "Serpod Server",
+            "database": "gezamarketplace",
+            "username": "postgres",
+            "password": "Lq-6qUqPf7cAH6F7Qi29oGFUm8sI4YC4"
+        }
+    ]
+}

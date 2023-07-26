@@ -1,0 +1,19 @@
+class: SaleOrder
+table: sale_order
+fields:
+  bookingOrderId: int,parent=booking_order
+  orderType: String
+  orderedItem: BeautyStyle
+  orderCreatedDate: DateTime?
+  orderCornfirmedDate: DateTime?
+  orderBookedTime: String
+  orderBookedDate: String
+  customer: Person
+  orderingFor: String,
+  vendor: Person
+  customerId: int, parent=person
+  vendorId: int, parent=person
+  customerRating: String?
+  stylistRating: String?
+  searchTerm: String?
+  orderStatus: String?

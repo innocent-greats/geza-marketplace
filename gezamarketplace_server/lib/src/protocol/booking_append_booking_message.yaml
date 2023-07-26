@@ -1,0 +1,3 @@
+class: AppendBookingMessage
+fields:
+  bookingMessage: BookingMessage

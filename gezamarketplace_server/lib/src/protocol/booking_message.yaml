@@ -1,0 +1,5 @@
+class: BookingMessage
+table: booking_message
+fields:
+  bookingChatId: int, BookingOrderChat
+  chatMessage: ChatMessage

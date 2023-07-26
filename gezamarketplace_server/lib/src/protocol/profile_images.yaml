@@ -1,0 +1,6 @@
+class: ProfileImages
+table: profile_images
+fields:
+  dateAdded: DateTime?
+  personId: int, parent=person
+  pathLocation: String

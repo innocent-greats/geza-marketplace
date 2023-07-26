@@ -1,0 +1,17 @@
+class: Product
+table: product
+fields:
+  name: String
+  category: String
+  description: String?
+  cityName: String
+  neighbourhoodName: String
+  dateAdded: DateTime?
+  amount: double?
+  images: List<Images>?
+  tags: List<Tag>?
+  shares: List<Share>?
+  stylistId: int?, parent=person
+  customerId: int?, parent=person
+  searchTerm: String?
+  createdDate: String?

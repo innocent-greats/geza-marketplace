@@ -1,0 +1,20 @@
+
+  // Future<String> startSubscribeToEvents(Session session) async {
+  //   var url = Uri.http('127.0.0.1:5000', 'api/v1/subscriptions');
+  //   print('the url $url');
+  //   var body = json.encode({
+  //     "type": "start",
+  //     "name": "geza-marketplace",
+  //     "namespace": "default",
+  //     "autoack": true
+  //   });
+
+  //   Map<String, String> headers = {
+  //     'Content-type': 'application/json',
+  //     'Accept': 'application/json',
+  //   };
+  //   var response = await http.post(url, headers: headers, body: body);
+  //   print('Response status: ${response.statusCode}');
+  //   print('Response body: ${response.body}');
+  //   return response.body.toString();
+  // }

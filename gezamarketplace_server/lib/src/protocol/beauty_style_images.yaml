@@ -1,0 +1,7 @@
+class: Images
+table: images
+fields:
+  dateAdded: DateTime?
+  uploaderId: int, parent=person
+  beautyStyleId: int?, parent=beauty_style
+  pathLocation: String

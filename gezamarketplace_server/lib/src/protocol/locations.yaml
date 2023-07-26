@@ -1,0 +1,8 @@
+class: Location
+table: location
+fields:
+  cityName: String
+  neighbourhoodName: String
+  mapName: String
+  lat: String
+  long: String

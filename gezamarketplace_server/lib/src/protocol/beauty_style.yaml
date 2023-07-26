@@ -1,0 +1,16 @@
+class: BeautyStyle
+table: beauty_style
+fields:
+  name: String
+  category: String
+  description: String?
+  cityName: String
+  neighbourhoodName: String
+  dateAdded: String?
+  amount: double?
+  images: List<Images>
+  tags: List<Tag>?
+  shares: List<Share>?
+  stylistId: int?, parent=person
+  customerId: int?, parent=person
+  searchTerm: String?

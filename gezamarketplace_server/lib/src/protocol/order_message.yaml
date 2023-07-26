@@ -1,0 +1,7 @@
+class: OrderMessage
+table: order_message
+fields:
+  createdDate: DateTime?
+  orderType: String
+  orderId: int, parent=sale_order
+  essage: Message

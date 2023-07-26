@@ -1,0 +1,8 @@
+class: Share
+table: share
+fields:
+  dateAdded: DateTime?
+  stylistId: int, parent=person
+  beautyStyleId: int?, parent=beauty_style
+  shareBy: int?, parent=person
+  sharewith: int?, parent=person

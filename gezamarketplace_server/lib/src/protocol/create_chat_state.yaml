@@ -1,0 +1,9 @@
+class: ChatMessageCreateMessage
+fields:
+  bookingChatId: int, BookingOrderChat
+  senderId: int, parent=person
+  sender:  Person
+  recieverId: int, parent=person
+  reciever: Person
+  message: String
+  dateCreated: DateTime

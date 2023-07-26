@@ -1,0 +1,9 @@
+class: BookingOrderCreateMessage
+fields:
+  selectedDate: String,
+  selectedTime: String,
+  customerId: int, parent=person
+  customerType: String,
+  vendorId: int, parent=person
+  beautyStyleId: int, beauty_style=beauty_style
+  dateCreated: DateTime?

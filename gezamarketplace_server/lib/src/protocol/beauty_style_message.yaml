@@ -1,0 +1,3 @@
+class: BeautyStyleAppendMessage
+fields:
+  beautyStyle: BeautyStyle

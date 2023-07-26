@@ -1,0 +1,3 @@
+class: BookingOrderStateMessage
+fields:
+  bookingOrders: List<BookingOrder>
