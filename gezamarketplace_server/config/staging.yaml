@@ -11,17 +11,24 @@
 # Configuration for the main API server.
 apiServer:
   port: 8080
-  publicHost: api.geza.simplyledgers.systems
-  publicPort: 443
-  publicScheme: https
+  publicHost: localhost
+  publicPort: 8080
+  publicScheme: http
 
+# # Configuration for the Insights server.
+# insightsServer:
+#   port: 8081
+#   publicHost: insights.geza.simplyledgers.systems
+#   publicPort: 443
+#   publicScheme: https
 # Configuration for the Insights server.
 insightsServer:
   port: 8081
-  publicHost: insights.geza.simplyledgers.systems
-  publicPort: 443
-  publicScheme: https
+  publicHost: localhost
+  publicPort: 8081
+  publicScheme: http
 
+  
 # Configuration for the web server.
 webServer:
   port: 8082
@@ -33,8 +40,14 @@ webServer:
 # Engine Terraform configuration is to connect on a private IP address.
 # If you are connecting on a public IP (e.g. on AWS or Google Cloud Run), you
 # connect on the public IP of the database e.g. database-staging.geza.simplyledgers.systems.
+# database:
+#   host: database.private-staging.geza.simplyledgers.systems
+#   port: 5432
+#   name: serverpod
+#   user: postgres
+# This is the database setup for your server.
 database:
-  host: 144.91.100.42
+  host: localhost
   port: 8090
   name: gezamarketplace
   user: postgres
